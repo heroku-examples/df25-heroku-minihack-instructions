@@ -35,8 +35,8 @@ In this workshop, we're enhancing several agents with custom code written in lan
     Clone this repository and change to the directory created: 
 
     ```sh
-    git clone https://github.com/heroku-examples/heroku-df25-heroku-minihack-instructions
-    cd heroku-df25-heroku-minihack-instructions
+    git clone https://github.com/heroku-examples/df25-heroku-minihack-instructions
+    cd df25-heroku-minihack-instructions
     ```
 
 2. **Connecting Heroku to Your Org**
