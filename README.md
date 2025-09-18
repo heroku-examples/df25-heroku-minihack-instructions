@@ -14,7 +14,7 @@ In this workshop, we're enhancing several agents with custom code written in lan
 - The latest Heroku AppLink CLI Plugin installed [link](https://devcenter.heroku.com/articles/heroku-integration-cli).
 - The `git` CLI
 
-## Steps for All Agents
+### Steps for All Agents
 
 1. **Logging into Heroku and Cloning the Repository**
 
@@ -29,7 +29,7 @@ In this workshop, we're enhancing several agents with custom code written in lan
 
     ```sh
     Team                      Role         
-    ──────────────────────── ──────────── 
+    ────────────────────────  ──────────── 
     025-dreamforce-mini-hack  collaborator            
     ```
     Clone this repository and change to the directory created: 
@@ -44,8 +44,8 @@ In this workshop, we're enhancing several agents with custom code written in lan
     Run the command below. When prompted, enter the username and password for your org and accept the required permissions prompt:
     
     ```sh
-    heroku salesforce:connect my-org-yourname --app df25-heroku-minihack-actions --store-as-run-as-user 
-    ```
+    heroku salesforce:connect my-org-yourname --app df25-minihack-actionservice     
+   ```
 
     > Replace `yourname` in the command above. For example, for Chris Wall, use `my-org-cwall`.
 
@@ -54,8 +54,8 @@ In this workshop, we're enhancing several agents with custom code written in lan
     The action code uses **Heroku AppLink** to seamlessly access data within the org. Run the following command to link the Heroku app to your org:
     
     ```sh
-    heroku salesforce:import api-docs.yaml --org-name my-org-yourname --app df25-heroku-minihack-actions --client-name ActionsService
-    ```
+    heroku salesforce:publish api-docs.yaml --client-name ActionsService --connection-name applink-org --app my-org-yourname --authorization-connected-app-name ActionsServiceConnectedApp --authorization-permission-set-name ActionsServicePermissions        
+   ```
 
     > As per the last step, be sure to edit `my-org-yourname` in the command above.
 
@@ -71,78 +71,7 @@ In this workshop, we're enhancing several agents with custom code written in lan
 
     Ensure the Agent user has permission to invoke the Heroku application imported above. Locate the `ActionsService` permission set and click *Manage Assignments*, then search for and add the `EinsteinServiceAgent User` user and assign.
 
-5. **Deploy to Your Salesforce Org**
-
-    Heroku actions need a small Flow wrapper to be used with Agentforce. Deploy these using the command below:
-
-    ```sh
-    sf project deploy start --metadata Flow -o my-org
-    ```
-    > The above command assumes you have already authenticated your org with the `sf` CLI using an alias of `my-org`. If this is not the case, use the `sf org login web --alias my-org` command to authenticate with this alias or your chosen alias.
-
-    > Support for using Heroku applications directly with Agentforce is being rolled out to our service. This step will be removed once this is complete.
-
-## Add an Action to the Astro Airlines Travel Agent
-
-This action uses flight information from Salesforce and CO₂ emissions data to estimate the carbon footprint of a flight. Heroku integrates in real-time with environmental data APIs (ICAO Carbon Emissions Calculator, Google Flights API, IATA CO₂ Data), collates and queries flight data in memory, and calculates CO₂ emissions per route, traveler, aircraft type, and distance traveled.
-
-1. **Creating an Agentforce Action**
-
-    To create an Agentforce Action, search for **Agent Actions** under **Setup** to navigate to the **Agent Actions** page. Click **New Agent Action** in the top right corner, select **Flow**, search for **Calculate Carbon Footprint**, select the action, and click **Next**. Complete the checkboxes as shown below and click **Finish**. 
-
-    <img src="images/agent-action-carbon-calc.jpg">
-
-2. **Adding an Action to an Agent**
-
-    Locate **Agents** under the **Setup** menu, click **Astro Airlines Travel Agent**, and click **Open in Builder**. Click on the **Topics** tab and **Travel Agent**. In the **This Topic's Actions** tab, click **New** > **Add from Asset Library**. Search for **Calculate Carbon Footprint**, select it, and click **Finish**.
-    
-3. **Testing Your Heroku Action**
-
-    In **Agent Builder**, enter the following to invoke your action:
-
-    ```
-    I want to travel from SFO to LAX
-    ```
-
-    Agent lists the available flights for the user to choose.
-
-    ```
-    What is the total carbon footprint for flight 1?
-    ```
-
-    <img src="images/agent-response-carbon-calc.jpg">
-
-## Add an Action to the Trailblazer Outfitters Retail Agent
-
-This action retrieves product information, including size and weight. It dynamically calls APIs of approved shipping companies, collates the shipping costs and timelines in memory, and returns them to Agentforce along with a recommendation.
-
-1. **Creating an Agentforce Action**
-
-    To create an Agentforce Action, search for **Agent Actions** under **Setup** to navigate to the **Agent Actions** page. Click **New Agent Action** in the top right corner, select **Flow**, search for **Calculate Shipping Options**, select the action, and click **Next**. Complete the checkboxes as shown below and click **Finish**. 
-
-    <img src="images/agent-action-shipping-calc.jpg">
-
-2. **Adding an Action to an Agent**
-
-    Locate **Agents** under the **Setup** menu, click **Trailblazer Outfitters Service Agent**, and click **Open in Builder**. Click on the **Topics** tab and **Sales Assistant**. In the **This Topic's Actions** tab, click **New** > **Add from Asset Library**. Search for **Calculate Shipping Options**, select it, and click **Finish**.
-
-3. **Testing Your Heroku Action**
-
-    Enter the following in **Agent Builder**:
-
-    ```
-    I am looking for warm clothes?
-    ```
-
-    Agent responds with a list of options, enter the following:
-
-    ```
-    Can you recommend shipping options for item 1 so that I receive it within a week for under $50?
-    ```
-
-    <img src="images/agent-response-shipping-calc.jpg">
-
-## Add an Action to the Koa Car Agent
+### Add an Action to the Koa Car Agent
 
 This action evaluates real-time car valuations from industry sources (AutoTrader, Edmunds, KBB), assesses user credit status via finance APIs, and optimizes business margins while ensuring competitiveness. By leveraging Heroku’s scalable processing power, Agentforce-powered agents can make real-time financing decisions, delivering personalized finance offers within Salesforce.
 
@@ -179,3 +108,67 @@ This action evaluates real-time car valuations from industry sources (AutoTrader
     ```
 
     <img src="images/agent-response-finance-calc.jpg">
+
+
+## Mini Hack Stretch Goals
+
+
+### Add an Action to the Astro Airlines Travel Agent
+
+This action uses flight information from Salesforce and CO₂ emissions data to estimate the carbon footprint of a flight. Heroku integrates in real-time with environmental data APIs (ICAO Carbon Emissions Calculator, Google Flights API, IATA CO₂ Data), collates and queries flight data in memory, and calculates CO₂ emissions per route, traveler, aircraft type, and distance traveled.
+
+1. **Creating an Agentforce Action**
+
+    To create an Agentforce Action, search for **Agent Actions** under **Setup** to navigate to the **Agent Actions** page. Click **New Agent Action** in the top right corner, select **Flow**, search for **Calculate Carbon Footprint**, select the action, and click **Next**. Complete the checkboxes as shown below and click **Finish**. 
+
+    <img src="images/agent-action-carbon-calc.jpg">
+
+2. **Adding an Action to an Agent**
+
+    Locate **Agents** under the **Setup** menu, click **Astro Airlines Travel Agent**, and click **Open in Builder**. Click on the **Topics** tab and **Travel Agent**. In the **This Topic's Actions** tab, click **New** > **Add from Asset Library**. Search for **Calculate Carbon Footprint**, select it, and click **Finish**.
+    
+3. **Testing Your Heroku Action**
+
+    In **Agent Builder**, enter the following to invoke your action:
+
+    ```
+    I want to travel from SFO to LAX
+    ```
+
+    Agent lists the available flights for the user to choose.
+
+    ```
+    What is the total carbon footprint for flight 1?
+    ```
+
+    <img src="images/agent-response-carbon-calc.jpg">
+
+### Add an Action to the Trailblazer Outfitters Retail Agent
+
+This action retrieves product information, including size and weight. It dynamically calls APIs of approved shipping companies, collates the shipping costs and timelines in memory, and returns them to Agentforce along with a recommendation.
+
+1. **Creating an Agentforce Action**
+
+    To create an Agentforce Action, search for **Agent Actions** under **Setup** to navigate to the **Agent Actions** page. Click **New Agent Action** in the top right corner, select **Flow**, search for **Calculate Shipping Options**, select the action, and click **Next**. Complete the checkboxes as shown below and click **Finish**. 
+
+    <img src="images/agent-action-shipping-calc.jpg">
+
+2. **Adding an Action to an Agent**
+
+    Locate **Agents** under the **Setup** menu, click **Trailblazer Outfitters Service Agent**, and click **Open in Builder**. Click on the **Topics** tab and **Sales Assistant**. In the **This Topic's Actions** tab, click **New** > **Add from Asset Library**. Search for **Calculate Shipping Options**, select it, and click **Finish**.
+
+3. **Testing Your Heroku Action**
+
+    Enter the following in **Agent Builder**:
+
+    ```
+    I am looking for warm clothes?
+    ```
+
+    Agent responds with a list of options, enter the following:
+
+    ```
+    Can you recommend shipping options for item 1 so that I receive it within a week for under $50?
+    ```
+
+    <img src="images/agent-response-shipping-calc.jpg">
