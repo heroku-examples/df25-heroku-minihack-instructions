@@ -43,7 +43,7 @@ In this workshop, we're enhancing several agents with custom code written in lan
 
     Run the command below. When prompted, enter the username and password for your org and accept the required permissions prompt:
     
-    ```sh
+    ```s
     heroku salesforce:connect my-org-yourname --app df25-minihack-actionservice     
    ```
 
@@ -64,7 +64,7 @@ In this workshop, we're enhancing several agents with custom code written in lan
     <img src="images/applink.jpg">
 
     <img src="images/operation.jpg">
-
+   
     In the following steps, you will configure an Agentforce Action for one of the above operations.
 
 4. **Grant Permissions to the Heroku Application**
