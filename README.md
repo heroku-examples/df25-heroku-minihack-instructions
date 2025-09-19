@@ -7,7 +7,7 @@ In this workshop, we're enhancing several agents with custom code written in lan
 
 ## Requirements
 
-- Access to a Salesforce Org with Agentforce enabled and the TDX mini-hack objects and apps deployed.
+- Access to a Salesforce Org with Agentforce enabled and the DF mini-hack objects and apps deployed.
 - Access to a Heroku environment enrolled in the `2025-dreamforce-mini-hack` Heroku team.
 - The latest Salesforce CLI installed [link](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli.htm).
 - The latest Heroku CLI installed [link](https://devcenter.heroku.com/articles/heroku-cli#install-the-heroku-cli).
