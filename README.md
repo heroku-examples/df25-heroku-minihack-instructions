@@ -30,7 +30,7 @@ In this workshop, we're enhancing several agents with custom code written in lan
     ```sh
     Team                      Role         
     ────────────────────────  ──────────── 
-    025-dreamforce-mini-hack  collaborator            
+    2025-dreamforce-mini-hack  collaborator            
     ```
     Clone this repository and change to the directory created: 
 
